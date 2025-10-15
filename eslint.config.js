@@ -53,6 +53,13 @@ export default defineConfig([
     rules: {
       'tailwindcss/classnames-order': 'warn',
       'tailwindcss/no-custom-classname': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
     },
   },
   {
