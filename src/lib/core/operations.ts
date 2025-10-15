@@ -1,5 +1,5 @@
-import type { Bit, Bits, Flags, StepState, ALUResult } from './types'
 import { createBits } from './bits'
+import type { Bit, Bits, Flags, StepState, ALUResult } from './types'
 import { fullAdder, computeTwosComplement } from './arithmetic'
 
 /**
@@ -27,7 +27,7 @@ export function computeFlags(
  * Performs ripple-carry addition of two bit arrays, generating step-by-step trace.
  * Returns array of StepState objects, one per bit position.
  */
-export function addStepwise(a: Bits, b: Bits, signed: boolean): StepState[] {
+export function addStepwise(a: Bits, b: Bits, _signed: boolean): StepState[] {
   const width = a.length
 
   if (b.length !== width) {
@@ -42,30 +42,14 @@ export function addStepwise(a: Bits, b: Bits, signed: boolean): StepState[] {
     const { sum, carry: carryOut } = fullAdder(a[i], b[i], carry)
     result[i] = sum
 
-    // Compute partial flags at this step
-    const partialResult = result.slice(0, i + 1) as Bits
-    const allZero = partialResult.every((bit, idx) => idx <= i && bit === 0)
-
-    // Overflow detection: occurs when carry into MSB differs from carry out of MSB
-    const isLastBit = i === width - 1
-    const overflow = isLastBit && signed ? carry !== carryOut : false
-
-    const flags: Flags = {
-      zero: isLastBit ? allZero : false,
-      sign: isLastBit && signed ? sum === 1 : false,
-      carry: isLastBit ? carryOut === 1 : false,
-      overflow,
-    }
-
     steps.push({
-      index: i,
+      bitIndex: i,
       carryIn: carry,
       carryOut,
       aBit: a[i],
       bBit: b[i],
-      sumBit: sum,
-      partialResult: [...partialResult] as Bits,
-      flags,
+      sum,
+      description: `Bit ${String(i)}: ${String(a[i])} + ${String(b[i])} + carry(${String(carry)}) = ${String(sum)}, carry-out: ${String(carryOut)}`,
     })
 
     carry = carryOut
@@ -80,15 +64,28 @@ export function addStepwise(a: Bits, b: Bits, signed: boolean): StepState[] {
  */
 export function addFull(a: Bits, b: Bits, signed: boolean): ALUResult {
   const steps = addStepwise(a, b, signed)
+  const width = a.length
+  
+  // Build result from steps
+  const result: Bits = steps.map(step => step.sum)
+  
+  // Compute final flags
   const lastStep = steps.at(-1)
-
   if (!lastStep) {
     throw new Error('No steps generated; invalid inputs')
   }
+  
+  // Overflow detection: sign bit mismatch when operands have same sign
+  const aSign = a[width - 1]
+  const bSign = b[width - 1]
+  const resultSign = result[width - 1]
+  const overflow = signed && aSign === bSign && aSign !== resultSign
+  
+  const flags = computeFlags(result, signed, lastStep.carryOut, overflow)
 
   return {
-    result: lastStep.partialResult,
-    flags: lastStep.flags,
+    result,
+    flags,
     steps,
   }
 }
