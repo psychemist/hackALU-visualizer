@@ -9,15 +9,14 @@ import { decimalToBits, bitsToDecimal } from '../bits'
 
 describe('ALU Operations', () => {
   describe('addStepwise', () => {
-    it('adds two unsigned numbers with step trace', () => {
-      const a = decimalToBits(5, 4, false) // 0b0101
-      const b = decimalToBits(3, 4, false) // 0b0011
+    it('adds two numbers with carry propagation', () => {
+      const a = decimalToBits(5, 4, false)
+      const b = decimalToBits(3, 4, false)
       const steps = addStepwise(a, b, false)
 
       expect(steps).toHaveLength(4)
-      const lastStep = steps[3]
-      expect(lastStep).toBeDefined()
-      expect(bitsToDecimal(lastStep.partialResult, false)).toBe(8) // 5 + 3 = 8
+      const result = steps.map(s => s.sum)
+      expect(bitsToDecimal(result, false)).toBe(8) // 5 + 3 = 8
     })
 
     it('detects carry flag on overflow', () => {
@@ -27,38 +26,18 @@ describe('ALU Operations', () => {
 
       const lastStep = steps[3]
       expect(lastStep).toBeDefined()
-      expect(lastStep.flags.carry).toBe(true) // Overflow: 15 + 1 = 16 (carry out)
-      expect(bitsToDecimal(lastStep.partialResult, false)).toBe(0) // Wraps to 0
+      expect(lastStep.carryOut).toBe(1) // Overflow: 15 + 1 = 16 (carry out)
+      const result = steps.map(s => s.sum)
+      expect(bitsToDecimal(result, false)).toBe(0) // Wraps to 0
     })
 
-    it('detects zero flag', () => {
-      const a = decimalToBits(0, 4, false)
-      const b = decimalToBits(0, 4, false)
+    it('generates description for each step', () => {
+      const a = decimalToBits(5, 4, false)
+      const b = decimalToBits(3, 4, false)
       const steps = addStepwise(a, b, false)
 
-      const lastStep = steps[3]
-      expect(lastStep).toBeDefined()
-      expect(lastStep.flags.zero).toBe(true)
-    })
-
-    it('detects overflow in signed addition', () => {
-      const a = decimalToBits(7, 4, true) // Max positive in 4-bit
-      const b = decimalToBits(1, 4, true)
-      const steps = addStepwise(a, b, true)
-
-      const lastStep = steps[3]
-      expect(lastStep).toBeDefined()
-      expect(lastStep.flags.overflow).toBe(true) // 7 + 1 overflows to -8
-    })
-
-    it('sets sign flag for negative result', () => {
-      const a = decimalToBits(-5, 4, true)
-      const b = decimalToBits(-2, 4, true)
-      const steps = addStepwise(a, b, true)
-
-      const lastStep = steps[3]
-      expect(lastStep).toBeDefined()
-      expect(lastStep.flags.sign).toBe(true) // Result is negative
+      expect(steps[0].description).toContain('Bit 0')
+      expect(steps[3].description).toContain('Bit 3')
     })
 
     it('throws on mismatched widths', () => {
@@ -93,6 +72,32 @@ describe('ALU Operations', () => {
       const result = addFull(a, b, false)
 
       expect(result.steps).toHaveLength(4)
+    })
+
+    it('detects zero flag', () => {
+      const a = decimalToBits(0, 4, false)
+      const b = decimalToBits(0, 4, false)
+      const result = addFull(a, b, false)
+
+      expect(result.flags.zero).toBe(true)
+    })
+
+    it('detects overflow in signed addition', () => {
+      const a = decimalToBits(7, 4, true) // Max positive in 4-bit
+      const b = decimalToBits(1, 4, true)
+      const result = addFull(a, b, true)
+
+      expect(result.flags.overflow).toBe(true) // 7 + 1 overflows to -8
+      expect(bitsToDecimal(result.result, true)).toBe(-8)
+    })
+
+    it('sets sign flag for negative result', () => {
+      const a = decimalToBits(-5, 4, true)
+      const b = decimalToBits(-2, 4, true)
+      const result = addFull(a, b, true)
+
+      expect(result.flags.sign).toBe(true) // Result is negative
+      expect(bitsToDecimal(result.result, true)).toBe(-7)
     })
   })
 
