@@ -1,0 +1,30 @@
+{
+  "app": {
+    "name": "ALU Visualizer"
+  },
+  "scaffold": {
+    "title": "ALU Visualizer",
+    "subtitle": "Scaffolding is ready. Tooling, testing, Storybook, and PWA support are configured so later phases can focus on simulation logic and pedagogy.",
+    "phase0Banner": "phase 0 complete",
+    "checkpoints": {
+      "tooling": "✅ Tooling baseline locked in (Vite, Tailwind, Headless UI, strict ESLint/Prettier).",
+      "testing": "✅ Testing harness ready (Vitest, Testing Library, Playwright).",
+      "storybook": "✅ Storybook Vite builder available for component-first development.",
+      "pwa": "✅ Offline-ready PWA foundation configured via vite-plugin-pwa."
+    },
+    "nextSteps": {
+      "title": "What comes next",
+      "body": "Phase 1 will focus on the pure simulation core. Once the numeric utilities land, the UI can project genuine ALU states instead of placeholders."
+    },
+    "resources": {
+      "title": "Reference links",
+      "items": [
+        "Implementation plan in IMPLEMENTATION.md",
+        "Vite + React + Tailwind docs",
+        "Testing strategy (Vitest, Playwright)",
+        "Storybook guidelines"
+      ]
+    },
+    "footer": "Crafted for clarity • Pedagogy first • Ready for the next build phase"
+  }
+}
