@@ -1,20 +1,36 @@
-import { render, screen } from '@testing-library/react'
-import { I18nextProvider } from 'react-i18next'
-import { describe, expect, it } from 'vitest'
-import App from './App'
-import i18n from './i18n'
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import App from './App';
 
 describe('App', () => {
-  it('renders the Phase 0 callout', () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <App />
-      </I18nextProvider>,
-    )
+  it('renders the ALU Visualizer interface', () => {
+    render(<App />);
 
-    expect(screen.getByRole('heading', { name: /ALU Visualizer/i })).toBeInTheDocument()
-    expect(
-      screen.getByText(/Phase 1 will focus on the pure simulation core/i),
-    ).toBeInTheDocument()
-  })
-})
+    // Check for main heading
+    expect(screen.getByRole('heading', { name: /ALU Visualizer/i })).toBeInTheDocument();
+    
+    // Check for key sections
+    expect(screen.getByText(/Configure ALU inputs and operations/i)).toBeInTheDocument();
+    expect(screen.getByText(/Visualizer Coming Soon/i)).toBeInTheDocument();
+  });
+
+  it('renders input controls', () => {
+    render(<App />);
+
+    // Check for bit width selector
+    expect(screen.getByText(/Bit Width/i)).toBeInTheDocument();
+    
+    // Check for input mode toggle
+    expect(screen.getByText(/Input Mode:/i)).toBeInTheDocument();
+    
+    // Check for signed toggle
+    expect(screen.getByText(/Signed \(Two's Complement\)/i)).toBeInTheDocument();
+  });
+
+  it('renders control buttons', () => {
+    render(<App />);
+
+    expect(screen.getByRole('button', { name: /Random/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Reset/i })).toBeInTheDocument();
+  });
+});
