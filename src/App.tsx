@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 import { Layout } from './components/Layout';
 import { InputPanel } from './components/InputPanel';
 import { OutputPanel } from './components/OutputPanel';
+import { ALUVisualizer, StepController, TimelineView } from './components/visualizer';
 import { useALUStore } from './store/aluStore';
+import { useAnimationLoop } from './hooks/useAnimationLoop';
 
 function App() {
   const compute = useALUStore((state) => state.compute);
@@ -12,29 +14,27 @@ function App() {
     compute();
   }, [compute]);
 
+  // Enable animation loop
+  useAnimationLoop();
+
   return (
     <Layout>
       <div className="grid h-full gap-6 lg:grid-cols-3">
         {/* Left Panel - Inputs */}
-        <div className="lg:col-span-1">
+        <div className="space-y-4 lg:col-span-1">
           <InputPanel />
         </div>
 
-        {/* Center Panel - Visualizer (placeholder for now) */}
-        <div className="flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-8 text-center dark:border-gray-600 lg:col-span-1">
-          <div>
-            <p className="text-lg font-semibold text-gray-900 dark:text-white">
-              Visualizer Coming Soon
-            </p>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              Pipeline visualization will be implemented in Phase 4
-            </p>
-          </div>
+        {/* Center Panel - Visualizer */}
+        <div className="space-y-4 lg:col-span-1">
+          <ALUVisualizer />
+          <StepController />
         </div>
 
-        {/* Right Panel - Output */}
-        <div className="lg:col-span-1">
+        {/* Right Panel - Output & Timeline */}
+        <div className="space-y-4 lg:col-span-1">
           <OutputPanel />
+          <TimelineView />
         </div>
       </div>
     </Layout>
