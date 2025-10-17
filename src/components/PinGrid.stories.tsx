@@ -39,7 +39,7 @@ type Story = StoryObj<typeof meta>;
 export const EightBit: Story = {
   args: {
     label: 'X Input',
-    value: decimalToBits(42, 8, false),
+    value: decimalToBits(42, 8, false, false),
     onChange: () => {},
     showLabels: true,
     size: 'md',
@@ -52,7 +52,7 @@ export const EightBit: Story = {
 export const FourBit: Story = {
   args: {
     label: 'Small Value',
-    value: decimalToBits(15, 4, false),
+    value: decimalToBits(15, 4, false, false),
     onChange: () => {},
     showLabels: true,
     size: 'md',
@@ -65,7 +65,7 @@ export const FourBit: Story = {
 export const SixteenBit: Story = {
   args: {
     label: 'Wide Value',
-    value: decimalToBits(32768, 16, false),
+    value: decimalToBits(32768, 16, false, false),
     onChange: () => {},
     showLabels: true,
     size: 'sm',
@@ -78,7 +78,7 @@ export const SixteenBit: Story = {
 export const WithoutLabels: Story = {
   args: {
     label: 'No Labels',
-    value: decimalToBits(170, 8, false),
+    value: decimalToBits(170, 8, false, false),
     onChange: () => {},
     showLabels: false,
     size: 'md',
@@ -91,7 +91,7 @@ export const WithoutLabels: Story = {
 export const SmallSize: Story = {
   args: {
     label: 'Small Toggles',
-    value: decimalToBits(85, 8, false),
+    value: decimalToBits(85, 8, false, false),
     onChange: () => {},
     showLabels: true,
     size: 'sm',
@@ -104,7 +104,7 @@ export const SmallSize: Story = {
 export const LargeSize: Story = {
   args: {
     label: 'Large Toggles',
-    value: decimalToBits(85, 8, false),
+    value: decimalToBits(85, 8, false, false),
     onChange: () => {},
     showLabels: true,
     size: 'lg',
@@ -117,7 +117,7 @@ export const LargeSize: Story = {
 export const Disabled: Story = {
   args: {
     label: 'Disabled Grid',
-    value: decimalToBits(255, 8, false),
+    value: decimalToBits(255, 8, false, false),
     onChange: () => {},
     showLabels: true,
     size: 'md',

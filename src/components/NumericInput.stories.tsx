@@ -40,7 +40,7 @@ type Story = StoryObj<typeof meta>;
 export const Decimal: Story = {
   args: {
     label: 'Value',
-    value: decimalToBits(42, 8, true),
+    value: decimalToBits(42, 8, true, false),
     width: 8,
     signed: true,
     base: 'decimal',
@@ -55,7 +55,7 @@ export const Decimal: Story = {
 export const Hexadecimal: Story = {
   args: {
     label: 'Hex Value',
-    value: decimalToBits(255, 8, false),
+    value: decimalToBits(255, 8, false, false),
     width: 8,
     signed: false,
     base: 'hex',
@@ -70,7 +70,7 @@ export const Hexadecimal: Story = {
 export const Binary: Story = {
   args: {
     label: 'Binary Value',
-    value: decimalToBits(170, 8, false),
+    value: decimalToBits(170, 8, false, false),
     width: 8,
     signed: false,
     base: 'binary',
@@ -85,7 +85,7 @@ export const Binary: Story = {
 export const Signed16Bit: Story = {
   args: {
     label: 'Signed Value',
-    value: decimalToBits(-1024, 16, true),
+    value: decimalToBits(-1024, 16, true, false),
     width: 16,
     signed: true,
     base: 'decimal',
@@ -100,7 +100,7 @@ export const Signed16Bit: Story = {
 export const Unsigned4Bit: Story = {
   args: {
     label: 'Small Value',
-    value: decimalToBits(15, 4, false),
+    value: decimalToBits(15, 4, false, false),
     width: 4,
     signed: false,
     base: 'decimal',
@@ -130,7 +130,7 @@ export const Zero: Story = {
 export const MaxPositive: Story = {
   args: {
     label: 'Max Positive',
-    value: decimalToBits(127, 8, true),
+    value: decimalToBits(127, 8, true, false),
     width: 8,
     signed: true,
     base: 'decimal',
@@ -145,7 +145,7 @@ export const MaxPositive: Story = {
 export const MinNegative: Story = {
   args: {
     label: 'Min Negative',
-    value: decimalToBits(-128, 8, true),
+    value: decimalToBits(-128, 8, true, false),
     width: 8,
     signed: true,
     base: 'decimal',
@@ -168,7 +168,7 @@ export const InteractiveWithBaseSwitching: Story = {
     id: 'interactive',
   },
   render: () => {
-    const [value, setValue] = useState(decimalToBits(100, 8, true));
+    const [value, setValue] = useState(decimalToBits(100, 8, true, false));
     const [base, setBase] = useState<NumericBase>('decimal');
 
     return (
