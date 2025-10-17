@@ -11,7 +11,7 @@ describe('App', () => {
     
     // Check for key sections
     expect(screen.getByText(/Configure ALU inputs and operations/i)).toBeInTheDocument();
-    expect(screen.getByText(/Visualizer Coming Soon/i)).toBeInTheDocument();
+    expect(screen.getByText(/Animation Controls/i)).toBeInTheDocument();
   });
 
   it('renders input controls', () => {
@@ -30,7 +30,14 @@ describe('App', () => {
   it('renders control buttons', () => {
     render(<App />);
 
+    // Check for main control buttons
     expect(screen.getByRole('button', { name: /Random/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Reset/i })).toBeInTheDocument();
+    // Note: There are two reset buttons now (one in ControlButtons, one in StepController)
+    expect(screen.getAllByRole('button', { name: /Reset/i }).length).toBeGreaterThan(0);
+    
+    // Check for animation controls
+    expect(screen.getByRole('button', { name: /Play/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Step forward/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Step backward/i })).toBeInTheDocument();
   });
 });
