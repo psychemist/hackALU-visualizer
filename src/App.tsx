@@ -19,22 +19,53 @@ function App() {
 
   return (
     <Layout>
-      <div className="grid h-full gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         {/* Left Panel - Inputs */}
-        <div className="space-y-4 lg:col-span-1">
-          <InputPanel />
+        <div className="lg:col-span-3">
+          <div className="rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <div className="border-b border-gray-200 px-4 py-3 dark:border-gray-700">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Inputs
+              </h2>
+            </div>
+            <div className="p-4">
+              <InputPanel />
+            </div>
+          </div>
         </div>
 
         {/* Center Panel - Visualizer */}
-        <div className="space-y-4 lg:col-span-1">
-          <ALUVisualizer />
+        <div className="space-y-4 lg:col-span-6">
+          <div className="rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <div className="border-b border-gray-200 px-4 py-3 dark:border-gray-700">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                ALU Pipeline
+              </h2>
+            </div>
+            <div className="p-4">
+              <ALUVisualizer />
+            </div>
+          </div>
+          
           <StepController />
+          
+          <div className="rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <TimelineView />
+          </div>
         </div>
 
-        {/* Right Panel - Output & Timeline */}
-        <div className="space-y-4 lg:col-span-1">
-          <OutputPanel />
-          <TimelineView />
+        {/* Right Panel - Output */}
+        <div className="lg:col-span-3">
+          <div className="rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <div className="border-b border-gray-200 px-4 py-3 dark:border-gray-700">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Result & Details
+              </h2>
+            </div>
+            <div className="p-4">
+              <OutputPanel />
+            </div>
+          </div>
         </div>
       </div>
     </Layout>

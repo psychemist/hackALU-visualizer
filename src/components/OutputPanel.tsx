@@ -13,13 +13,10 @@ export function OutputPanel() {
 
   if (!result) {
     return (
-      <div className="space-y-6">
-        <div>
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Output</h2>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Configure inputs to see results
-          </p>
-        </div>
+      <div className="flex items-center justify-center py-12 text-center">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Configure inputs to see results
+        </p>
       </div>
     );
   }
@@ -29,18 +26,10 @@ export function OutputPanel() {
   const binaryValue = bitsToBinary(result.result);
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Output</h2>
-        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          ALU computation results
-        </p>
-      </div>
-
+    <div className="space-y-4">
       {/* Result Value */}
-      <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
-        <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">Result</h3>
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-900">
+        <h3 className="mb-2 text-sm font-semibold text-gray-900 dark:text-white">Result</h3>
         
         <div className="space-y-2">
           <div className="flex items-baseline justify-between">
@@ -67,8 +56,8 @@ export function OutputPanel() {
       </div>
 
       {/* Flags */}
-      <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
-        <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">Flags</h3>
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-900">
+        <h3 className="mb-2 text-sm font-semibold text-gray-900 dark:text-white">Flags</h3>
         
         <div className="grid grid-cols-2 gap-3">
           <FlagBadge label="Zero" active={result.flags.zero} />
@@ -79,8 +68,8 @@ export function OutputPanel() {
       </div>
 
       {/* Pipeline Stages */}
-      <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
-        <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">Pipeline Stages</h3>
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-900">
+        <h3 className="mb-2 text-sm font-semibold text-gray-900 dark:text-white">Pipeline Stages</h3>
         
         <div className="space-y-3">
           <PipelineStage

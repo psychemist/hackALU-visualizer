@@ -21,15 +21,7 @@ export function InputPanel() {
   const inputMode = useALUStore((state) => state.inputMode);
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Inputs</h2>
-        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          Configure ALU inputs and operations
-        </p>
-      </div>
-
+    <div className="space-y-4">
       {/* Bit Width Selector */}
       <ConnectedBitWidthSelector />
 
@@ -40,12 +32,12 @@ export function InputPanel() {
       <InputModeToggle />
 
       {/* X Input */}
-      <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-900">
         {inputMode === 'numeric' ? <XNumericInput /> : <XPinGrid />}
       </div>
 
       {/* Y Input */}
-      <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-900">
         {inputMode === 'numeric' ? <YNumericInput /> : <YPinGrid />}
       </div>
 
@@ -53,7 +45,7 @@ export function InputPanel() {
       <ConnectedOperationSelector />
 
       {/* Control Bits Panel */}
-      <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-900">
         <ConnectedControlBitsPanel />
       </div>
 

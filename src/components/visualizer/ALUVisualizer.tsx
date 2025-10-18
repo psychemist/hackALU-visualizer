@@ -16,7 +16,7 @@ export function ALUVisualizer() {
 
   if (!result) {
     return (
-      <div className="flex h-full items-center justify-center">
+      <div className="flex items-center justify-center py-12">
         <p className="text-gray-500 dark:text-gray-400">
           Configure inputs to visualize ALU operation
         </p>

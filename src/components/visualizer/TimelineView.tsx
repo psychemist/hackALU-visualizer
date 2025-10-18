@@ -19,7 +19,7 @@ export function TimelineView() {
 
   if (!result) {
     return (
-      <div className="flex items-center justify-center rounded-lg border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800">
+      <div className="flex items-center justify-center p-8">
         <p className="text-gray-500 dark:text-gray-400">
           Configure inputs to view timeline
         </p>
@@ -43,11 +43,10 @@ export function TimelineView() {
   const svgHeight = ROW_HEIGHT * 5 + 40;
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
-      <div className="p-4">
-        <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">
-          Timeline View - Carry Propagation
-        </h3>
+    <div className="overflow-x-auto p-4">
+      <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">
+        Timeline View - Carry Propagation
+      </h3>
         
         <svg
           width={svgWidth}
@@ -220,7 +219,6 @@ export function TimelineView() {
             </marker>
           </defs>
         </svg>
-      </div>
     </div>
   );
 }
