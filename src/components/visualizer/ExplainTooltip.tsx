@@ -113,7 +113,7 @@ export function ExplainTooltip({
 
       {/* Pointer arrow */}
       <path
-        d={`M ${x - 5} ${y + 60} L ${x} ${y + 60} L ${x} ${y + 55} L ${x} ${y + 65} Z`}
+        d={`M ${String(x - 5)} ${String(y + 60)} L ${String(x)} ${String(y + 60)} L ${String(x)} ${String(y + 55)} L ${String(x)} ${String(y + 65)} Z`}
         fill="rgb(59, 130, 246)"
       />
     </g>

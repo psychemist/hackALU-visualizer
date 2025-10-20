@@ -59,8 +59,8 @@ export const FourBit: Story = {
       
       useEffect(() => {
         store.setWidth(4);
-        store.setX(decimalToBits(10, 4, false, false)); // 10
-        store.setY(decimalToBits(5, 4, false, false)); // 5
+        store.setX(decimalToBits(10, 4, false)); // 10
+        store.setY(decimalToBits(5, 4, false)); // 5
         store.setOperation('x+y');
       }, [store]);
 

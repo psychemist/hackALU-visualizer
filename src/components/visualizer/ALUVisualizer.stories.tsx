@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ALUVisualizer } from './ALUVisualizer';
 import { useALUStore } from '@/store/aluStore';
 import { useEffect } from 'react';
-import { numberToBits } from '@/lib/core';
+import { decimalToBits } from '@/lib/core';
 
 const meta = {
   title: 'Visualizer/ALUVisualizer',
